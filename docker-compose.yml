@@ -1,0 +1,20 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.7.3-management
+    volumes:
+      - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+    container_name: rabbitmq
+    restart: always
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=cookie
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=pass
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "cluster_status" ]
+      interval: 5s
+      timeout: 2s
+      retries: 20
+    ports:
+      - "5672:5672"
