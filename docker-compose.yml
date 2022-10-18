@@ -1,4 +1,5 @@
-version: '3'
+version: "3"
+
 services:
   rabbitmq:
     image: rabbitmq:3.7.3-management
@@ -12,7 +13,7 @@ services:
       - RABBITMQ_DEFAULT_USER=rabbitmq
       - RABBITMQ_DEFAULT_PASS=pass
     healthcheck:
-      test: [ "CMD", "rabbitmqctl", "cluster_status" ]
+      test: ["CMD", "rabbitmqctl", "cluster_status"]
       interval: 5s
       timeout: 2s
       retries: 20
